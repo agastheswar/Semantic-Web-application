@@ -1,0 +1,1423 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns="http://www.owl-ontologies.com/NYCoil.owl#"
+    xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#"
+    xmlns:xsp="http://www.owl-ontologies.com/2005/08/07/xsp.owl#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+    xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xml:base="http://www.owl-ontologies.com/NYCoil.owl">
+  <owl:Ontology rdf:about=""/>
+  <rdfs:Datatype rdf:about="http://www.w3.org/2001/XMLSchema#date"/>
+  <owl:Class rdf:ID="Owner">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:ID="Owneraddress"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="has"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Person"/>
+    </rdfs:subClassOf>
+    <owl:disjointWith>
+      <owl:Class rdf:ID="Buildingmanager"/>
+    </owl:disjointWith>
+  </owl:Class>
+  <owl:Class rdf:about="#Owneraddress">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Address"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Borogh_block_and_lot">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:ID="Building"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="contains"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Class rdf:ID="municipal_borogh_block_lot"/>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="Facilityaddress">
+    <owl:equivalentClass>
+      <owl:Class rdf:ID="municipal_address"/>
+    </owl:equivalentClass>
+    <rdfs:subClassOf rdf:resource="#Address"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Building">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#has"/>
+        </owl:onProperty>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="#Buildingmanager"/>
+        </owl:someValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#has"/>
+        </owl:onProperty>
+        <owl:someValuesFrom>
+          <owl:Class rdf:ID="Boiler"/>
+        </owl:someValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="#Owner"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="belongsto"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#has"/>
+        </owl:onProperty>
+        <owl:someValuesFrom rdf:resource="#Address"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#belongsto"/>
+        </owl:onProperty>
+        <owl:someValuesFrom rdf:resource="#Borogh_block_and_lot"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Buildingmanager">
+    <rdfs:subClassOf rdf:resource="#Person"/>
+    <owl:disjointWith rdf:resource="#Owner"/>
+  </owl:Class>
+  <owl:Class rdf:ID="municipal_building">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#has"/>
+        </owl:onProperty>
+        <owl:someValuesFrom rdf:resource="#municipal_address"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="#municipal_borogh_block_lot"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#belongsto"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#municipal_borogh_block_lot">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#contains"/>
+        </owl:onProperty>
+        <owl:someValuesFrom rdf:resource="#municipal_building"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="#has">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Building"/>
+          <owl:Class rdf:about="#municipal_building"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#municipal_address"/>
+          <owl:Class rdf:about="#Buildingmanager"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:range>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#contains">
+    <rdfs:range rdf:resource="#municipal_building"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Borogh_block_and_lot"/>
+          <owl:Class rdf:about="#municipal_borogh_block_lot"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#belongsto">
+    <owl:inverseOf rdf:resource="#contains"/>
+    <rdfs:domain rdf:resource="#Building"/>
+    <rdfs:range rdf:resource="#Borogh_block_and_lot"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:ID="source_energy_intensity">
+    <rdfs:domain rdf:resource="#municipal_building"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="city_name">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Address"/>
+          <owl:Class rdf:about="#municipal_address"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="retirement_date">
+    <rdfs:domain rdf:resource="#Boiler"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="capacity">
+    <rdfs:domain rdf:resource="#Boiler"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="agerange">
+    <rdfs:domain rdf:resource="#Boiler"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="street_name">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Address"/>
+          <owl:Class rdf:about="#municipal_address"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="total_oil_consumption_estimation_low">
+    <rdfs:domain rdf:resource="#Building"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="year_constructed">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Building"/>
+          <owl:Class rdf:about="#municipal_building"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="borogh_block_lot_number">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Borogh_block_and_lot"/>
+          <owl:Class rdf:about="#municipal_borogh_block_lot"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="no_of_residential_units">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:domain rdf:resource="#Building"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="gross_sq_ft">
+    <rdfs:domain rdf:resource="#municipal_building"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="type">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Building"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="total_oil_consumption_estimation_high">
+    <rdfs:domain rdf:resource="#Building"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="bin">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:domain rdf:resource="#municipal_building"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="zip_code">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Address"/>
+          <owl:Class rdf:about="#municipal_address"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="model">
+    <rdfs:domain rdf:resource="#Boiler"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="no_of_floors">
+    <rdfs:domain rdf:resource="#Building"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="name">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#municipal_building"/>
+          <owl:Class rdf:about="#Owner"/>
+          <owl:Class rdf:about="#Buildingmanager"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="agency">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#municipal_building"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="application">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Boiler"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="Installation_date">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:domain rdf:resource="#Boiler"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="area_of_building_on_lot">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:domain rdf:resource="#Building"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="state_abbr">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Address"/>
+          <owl:Class rdf:about="#municipal_address"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="total_emission"/>
+  <owl:DatatypeProperty rdf:ID="number_of_identical_boilers">
+    <rdfs:domain rdf:resource="#Boiler"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="no_of_buildings_on_lot">
+    <rdfs:domain rdf:resource="#Borogh_block_and_lot"/>
+  </owl:DatatypeProperty>
+  <owl:NamedIndividual rdf:ID="municipal_borogh_block_lot_2">
+    <no_of_buildings_on_lot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</no_of_buildings_on_lot>
+    <rdf:type rdf:resource="#municipal_borogh_block_lot"/>
+    <contains>
+      <owl:NamedIndividual rdf:ID="municipal_building_2">
+        <source_energy_intensity rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >334.5</source_energy_intensity>
+        <rdf:type rdf:resource="#municipal_building"/>
+        <year_constructed rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1929</year_constructed>
+        <agency rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >ACS</agency>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >ACS Bronx Field Office </name>
+        <gross_sq_ft rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+        >134500.0</gross_sq_ft>
+        <bin rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >2044743</bin>
+        <has>
+          <owl:NamedIndividual rdf:ID="municipal_address_2">
+            <state_abbr rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >NY</state_abbr>
+            <zip_code rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+            >10462</zip_code>
+            <street_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >974 Morris Park Ave</street_name>
+            <city_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Bronx</city_name>
+            <rdf:type rdf:resource="#municipal_address"/>
+          </owl:NamedIndividual>
+        </has>
+      </owl:NamedIndividual>
+    </contains>
+    <borogh_block_lot_number rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >241011</borogh_block_lot_number>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:ID="municipal_borogh_block_lot_1">
+    <no_of_buildings_on_lot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</no_of_buildings_on_lot>
+    <rdf:type rdf:resource="#municipal_borogh_block_lot"/>
+    <borogh_block_lot_number rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >3322820</borogh_block_lot_number>
+    <contains>
+      <owl:NamedIndividual rdf:ID="municipal_building_1">
+        <source_energy_intensity rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >141.4</source_energy_intensity>
+        <year_constructed rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1971</year_constructed>
+        <rdf:type rdf:resource="#municipal_building"/>
+        <bin rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >3073408</bin>
+        <gross_sq_ft rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+        >24500.0</gross_sq_ft>
+        <agency rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >ACS</agency>
+        <has>
+          <owl:NamedIndividual rdf:ID="municipal_address_4">
+            <city_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Brooklyn</city_name>
+            <street_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >200 Central Ave</street_name>
+            <rdf:type rdf:resource="#municipal_address"/>
+            <zip_code rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+            >11221</zip_code>
+            <state_abbr rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >NY</state_abbr>
+          </owl:NamedIndividual>
+        </has>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >200 Central Day Care Center Inc. </name>
+      </owl:NamedIndividual>
+    </contains>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:ID="Owneraddress_9">
+    <rdf:type rdf:resource="#Owneraddress"/>
+    <state_abbr rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >NY</state_abbr>
+    <zip_code rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >10454</zip_code>
+    <street_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >175 WALNUT AVENUE</street_name>
+    <city_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >BRONX</city_name>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:ID="Owneraddress_2">
+    <rdf:type rdf:resource="#Owneraddress"/>
+    <city_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >MANHATTAN</city_name>
+    <street_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >855 AVE</street_name>
+    <zip_code rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >10001</zip_code>
+    <state_abbr rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >NY</state_abbr>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:ID="Owneraddress_8">
+    <rdf:type rdf:resource="#Owneraddress"/>
+    <city_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >RIVERDALE</city_name>
+    <state_abbr rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >NY</state_abbr>
+    <street_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >5701 ARLINGTON AVENUE</street_name>
+    <zip_code rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >10471</zip_code>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:ID="Owneraddress_3">
+    <zip_code rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >10457</zip_code>
+    <street_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1650 SELWYN AVE</street_name>
+    <rdf:type rdf:resource="#Owneraddress"/>
+    <city_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >BRONX</city_name>
+    <state_abbr rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >NY</state_abbr>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:ID="municipal_borogh_block_lot_4">
+    <rdf:type rdf:resource="#municipal_borogh_block_lot"/>
+    <borogh_block_lot_number rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >0</borogh_block_lot_number>
+    <contains>
+      <owl:NamedIndividual rdf:ID="municipal_building_3">
+        <agency rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >ACS</agency>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Afro-American Parents ED Center #1 </name>
+        <year_constructed rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1931</year_constructed>
+        <has>
+          <owl:NamedIndividual rdf:ID="municipal_address_3">
+            <zip_code rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+            >11434</zip_code>
+            <city_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Queens</city_name>
+            <street_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >117-16 Sutphin Blvd</street_name>
+            <state_abbr rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >NY</state_abbr>
+            <rdf:type rdf:resource="#municipal_address"/>
+          </owl:NamedIndividual>
+        </has>
+        <source_energy_intensity rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >211.1</source_energy_intensity>
+        <gross_sq_ft rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+        >14475.0</gross_sq_ft>
+        <rdf:type rdf:resource="#municipal_building"/>
+        <bin rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >4260903</bin>
+      </owl:NamedIndividual>
+    </contains>
+    <no_of_buildings_on_lot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</no_of_buildings_on_lot>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:ID="municipal_borogh_block_lot_9">
+    <borogh_block_lot_number rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >41052369</borogh_block_lot_number>
+    <no_of_buildings_on_lot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</no_of_buildings_on_lot>
+    <rdf:type rdf:resource="#municipal_borogh_block_lot"/>
+    <contains>
+      <owl:NamedIndividual rdf:ID="municipal_building_8">
+        <has>
+          <owl:NamedIndividual rdf:ID="municipal_address_8">
+            <city_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Queens </city_name>
+            <street_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Classified </street_name>
+            <state_abbr rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >NY</state_abbr>
+            <rdf:type rdf:resource="#municipal_address"/>
+            <zip_code rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+            >11423</zip_code>
+          </owl:NamedIndividual>
+        </has>
+        <source_energy_intensity rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >142.4 </source_energy_intensity>
+        <agency rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >NYPD</agency>
+        <gross_sq_ft rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+        >33500.0</gross_sq_ft>
+        <rdf:type rdf:resource="#municipal_building"/>
+        <bin rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >4467695</bin>
+        <year_constructed rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1973</year_constructed>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Highway District </name>
+      </owl:NamedIndividual>
+    </contains>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:ID="municipal_borogh_block_lot_3">
+    <borogh_block_lot_number rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >3322820</borogh_block_lot_number>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:ID="Owneraddress_1">
+    <state_abbr rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >NY</state_abbr>
+    <zip_code rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >10467</zip_code>
+    <rdf:type rdf:resource="#Owneraddress"/>
+    <city_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >BRONX</city_name>
+    <street_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >754 MACE AVENUE</street_name>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:ID="municipal_borogh_block_lot_10">
+    <borogh_block_lot_number rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >2275836</borogh_block_lot_number>
+    <rdf:type rdf:resource="#municipal_borogh_block_lot"/>
+    <contains>
+      <owl:NamedIndividual rdf:ID="municipal_building_9">
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >New Day Family Residence II </name>
+        <gross_sq_ft rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+        >74778.0</gross_sq_ft>
+        <year_constructed rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1925</year_constructed>
+        <bin rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >2006311</bin>
+        <rdf:type rdf:resource="#municipal_building"/>
+        <has>
+          <owl:NamedIndividual rdf:ID="municipal_address_9">
+            <zip_code rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+            >10459</zip_code>
+            <state_abbr rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >NY</state_abbr>
+            <street_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >1275 Westchester Ave </street_name>
+            <rdf:type rdf:resource="#municipal_address"/>
+            <city_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Bronx</city_name>
+          </owl:NamedIndividual>
+        </has>
+        <source_energy_intensity rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >88.3 </source_energy_intensity>
+        <agency rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >HRA</agency>
+      </owl:NamedIndividual>
+    </contains>
+    <no_of_buildings_on_lot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</no_of_buildings_on_lot>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:ID="municipal_borogh_block_lot_7">
+    <contains>
+      <owl:NamedIndividual rdf:ID="municipal_building_6">
+        <year_constructed rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1970</year_constructed>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >100 Gold Street Office Building </name>
+        <source_energy_intensity rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >306.5</source_energy_intensity>
+        <agency rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >DCAS</agency>
+        <has>
+          <owl:NamedIndividual rdf:ID="municipal_address_6">
+            <rdf:type rdf:resource="#municipal_address"/>
+            <state_abbr rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >NY</state_abbr>
+            <city_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >NEW YORK</city_name>
+            <zip_code rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+            >10038</zip_code>
+            <street_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >100 Gold St </street_name>
+          </owl:NamedIndividual>
+        </has>
+        <bin rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1001289</bin>
+        <gross_sq_ft rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+        >655775.0</gross_sq_ft>
+        <rdf:type rdf:resource="#municipal_building"/>
+      </owl:NamedIndividual>
+    </contains>
+    <rdf:type rdf:resource="#municipal_borogh_block_lot"/>
+    <no_of_buildings_on_lot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</no_of_buildings_on_lot>
+    <borogh_block_lot_number rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >19425</borogh_block_lot_number>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:ID="Owneraddress_6">
+    <city_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >NEW YORK</city_name>
+    <state_abbr rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >NY</state_abbr>
+    <rdf:type rdf:resource="#Owneraddress"/>
+    <zip_code rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >11704</zip_code>
+    <street_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1634 BABYLON</street_name>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:ID="municipal_borogh_block_lot_8">
+    <rdf:type rdf:resource="#municipal_borogh_block_lot"/>
+    <no_of_buildings_on_lot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</no_of_buildings_on_lot>
+    <borogh_block_lot_number rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >111301</borogh_block_lot_number>
+    <contains>
+      <owl:NamedIndividual rdf:ID="municipal_building_7">
+        <rdf:type rdf:resource="#municipal_building"/>
+        <agency rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >DCLA</agency>
+        <gross_sq_ft rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+        >1500000.0</gross_sq_ft>
+        <bin rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1083846</bin>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >American Museum of Natural History </name>
+        <year_constructed rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1877</year_constructed>
+        <has>
+          <owl:NamedIndividual rdf:ID="municipal_address_7">
+            <city_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >NEW YORK</city_name>
+            <state_abbr rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >NY</state_abbr>
+            <street_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >200 Central Park West </street_name>
+            <rdf:type rdf:resource="#municipal_address"/>
+            <zip_code rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+            >10024</zip_code>
+          </owl:NamedIndividual>
+        </has>
+        <source_energy_intensity rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >371.8 </source_energy_intensity>
+      </owl:NamedIndividual>
+    </contains>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:ID="Owneraddress_7">
+    <state_abbr rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >NY</state_abbr>
+    <street_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >250 PARK AVE</street_name>
+    <zip_code rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >10003</zip_code>
+    <city_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >NEW YORK</city_name>
+    <rdf:type rdf:resource="#Owneraddress"/>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:ID="Owner_37">
+    <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >BRAGREIS REALTY CORP</name>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:ID="Owneraddress_4">
+    <street_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >191024 BROOKLYN</street_name>
+    <state_abbr rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >NY</state_abbr>
+    <city_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >NEW YORK</city_name>
+    <rdf:type rdf:resource="#Owneraddress"/>
+    <zip_code rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >11219</zip_code>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:ID="municipal_borogh_block_lot_5">
+    <rdf:type rdf:resource="#municipal_borogh_block_lot"/>
+    <no_of_buildings_on_lot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</no_of_buildings_on_lot>
+    <contains>
+      <owl:NamedIndividual rdf:ID="municipal_building_4">
+        <gross_sq_ft rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+        >42008.0</gross_sq_ft>
+        <bin rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >3326936</bin>
+        <has>
+          <owl:NamedIndividual rdf:ID="municipal_address_1">
+            <rdf:type rdf:resource="#municipal_address"/>
+            <street_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >1915 Oriental Blvd</street_name>
+            <city_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Brooklyn</city_name>
+            <state_abbr rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >NY</state_abbr>
+            <zip_code rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+            >11235</zip_code>
+          </owl:NamedIndividual>
+        </has>
+        <source_energy_intensity rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >361</source_energy_intensity>
+        <rdf:type rdf:resource="#municipal_building"/>
+        <year_constructed rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >2003</year_constructed>
+        <agency rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >CUNY</agency>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Kingsborough Comm. College Campus: Academic Village</name>
+      </owl:NamedIndividual>
+    </contains>
+    <borogh_block_lot_number rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >38760110</borogh_block_lot_number>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:ID="Owneraddress_5">
+    <zip_code rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >10463</zip_code>
+    <state_abbr rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >NY</state_abbr>
+    <city_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >BRONX</city_name>
+    <rdf:type rdf:resource="#Owneraddress"/>
+    <street_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >150 225 STREET</street_name>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:ID="municipal_borogh_block_lot_6">
+    <no_of_buildings_on_lot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</no_of_buildings_on_lot>
+    <borogh_block_lot_number rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >3786839</borogh_block_lot_number>
+    <contains>
+      <owl:NamedIndividual rdf:ID="municipal_building_5">
+        <year_constructed rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1956</year_constructed>
+        <gross_sq_ft rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+        >24558.0</gross_sq_ft>
+        <has>
+          <owl:NamedIndividual rdf:ID="municipal_address_5">
+            <street_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >655 New Lots Ave</street_name>
+            <rdf:type rdf:resource="#municipal_address"/>
+            <zip_code rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+            >11207</zip_code>
+            <state_abbr rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >NY</state_abbr>
+            <city_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Brooklyn</city_name>
+          </owl:NamedIndividual>
+        </has>
+        <bin rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >3090726</bin>
+        <rdf:type rdf:resource="#municipal_building"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Flatlands Branch Library </name>
+        <source_energy_intensity rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >162.6 </source_energy_intensity>
+        <agency rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >BPL</agency>
+      </owl:NamedIndividual>
+    </contains>
+    <rdf:type rdf:resource="#municipal_borogh_block_lot"/>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:ID="Building_7">
+    <area_of_building_on_lot rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >318060</area_of_building_on_lot>
+    <belongsto>
+      <owl:NamedIndividual rdf:ID="Borogh_block_and_lot_7">
+        <borogh_block_lot_number rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >2046710051</borogh_block_lot_number>
+        <no_of_buildings_on_lot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >2</no_of_buildings_on_lot>
+        <rdf:type rdf:resource="#Borogh_block_and_lot"/>
+        <contains rdf:resource="#Building_7"/>
+      </owl:NamedIndividual>
+    </belongsto>
+    <type rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Elevator Apartments</type>
+    <has>
+      <owl:NamedIndividual rdf:ID="Buildingmanager_7">
+        <rdf:type rdf:resource="#Buildingmanager"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >801 TILDEN STREET CORP</name>
+      </owl:NamedIndividual>
+    </has>
+    <no_of_floors rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >30</no_of_floors>
+    <total_oil_consumption_estimation_low rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >248055.0</total_oil_consumption_estimation_low>
+    <total_oil_consumption_estimation_high rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >354364.0</total_oil_consumption_estimation_high>
+    <year_constructed rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1971</year_constructed>
+    <belongsto>
+      <owl:NamedIndividual rdf:ID="Owner_7">
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >TILDEN TOWERS  II</name>
+        <rdf:type rdf:resource="#Owner"/>
+      </owl:NamedIndividual>
+    </belongsto>
+    <has>
+      <owl:NamedIndividual rdf:ID="Boiler_7">
+        <retirement_date rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+        >2017-12-03</retirement_date>
+        <agerange rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >26 to 30 yrs</agerange>
+        <capacity rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+        >16.94</capacity>
+        <model rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >KEWANEE 7L-289 </model>
+        <number_of_identical_boilers rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >2</number_of_identical_boilers>
+        <application rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >CA007982R </application>
+        <Installation_date rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+        >1982-12-03</Installation_date>
+        <rdf:type rdf:resource="#Boiler"/>
+      </owl:NamedIndividual>
+    </has>
+    <rdf:type rdf:resource="#Building"/>
+    <has>
+      <owl:NamedIndividual rdf:ID="Facilityaddress_7">
+        <street_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >801 TILDEN STREET</street_name>
+        <rdf:type rdf:resource="#Facilityaddress"/>
+        <state_abbr rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >NY</state_abbr>
+        <zip_code rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >10467</zip_code>
+        <city_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >NEW YORK</city_name>
+      </owl:NamedIndividual>
+    </has>
+    <no_of_residential_units rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >266</no_of_residential_units>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:ID="Building_3">
+    <has>
+      <owl:NamedIndividual rdf:ID="Buildingmanager_3">
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >BRONX LEBANON HOSPITAL</name>
+        <rdf:type rdf:resource="#Buildingmanager"/>
+      </owl:NamedIndividual>
+    </has>
+    <belongsto>
+      <owl:NamedIndividual rdf:ID="Borogh_block_and_lot_3">
+        <rdf:type rdf:resource="#Borogh_block_and_lot"/>
+        <no_of_buildings_on_lot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1</no_of_buildings_on_lot>
+        <contains rdf:resource="#Building_3"/>
+        <borogh_block_lot_number rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >2028230001</borogh_block_lot_number>
+      </owl:NamedIndividual>
+    </belongsto>
+    <has>
+      <owl:NamedIndividual rdf:ID="Facilityaddress_3">
+        <state_abbr rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >NY</state_abbr>
+        <rdf:type rdf:resource="#Facilityaddress"/>
+        <city_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Bronx</city_name>
+        <zip_code rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >10457</zip_code>
+        <street_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1650 GRAND</street_name>
+      </owl:NamedIndividual>
+    </has>
+    <belongsto>
+      <owl:NamedIndividual rdf:ID="Owner_3">
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >BRONX LEBANON HOSPITAL</name>
+        <rdf:type rdf:resource="#Owner"/>
+      </owl:NamedIndividual>
+    </belongsto>
+    <total_oil_consumption_estimation_low rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >344925.0</total_oil_consumption_estimation_low>
+    <rdf:type rdf:resource="#Building"/>
+    <area_of_building_on_lot rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >480769</area_of_building_on_lot>
+    <no_of_residential_units rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >0</no_of_residential_units>
+    <no_of_floors rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >11</no_of_floors>
+    <total_oil_consumption_estimation_high rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >492750.0</total_oil_consumption_estimation_high>
+    <type rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Elevator Apartments</type>
+    <has>
+      <owl:NamedIndividual rdf:ID="Boiler_3">
+        <model rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >CLEAVER BROOKS CB-600-600 </model>
+        <retirement_date rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+        >2024-12-03</retirement_date>
+        <agerange rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >21 to 26 yrs</agerange>
+        <capacity rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+        >25.21</capacity>
+        <rdf:type rdf:resource="#Boiler"/>
+        <application rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >CA159489X </application>
+        <number_of_identical_boilers rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >2</number_of_identical_boilers>
+        <Installation_date rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+        >1989-12-03</Installation_date>
+      </owl:NamedIndividual>
+    </has>
+    <year_constructed rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1941</year_constructed>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:ID="Borogh_block_and_lot_4">
+    <no_of_buildings_on_lot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</no_of_buildings_on_lot>
+    <rdf:type rdf:resource="#Borogh_block_and_lot"/>
+    <borogh_block_lot_number rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >2025060016</borogh_block_lot_number>
+    <contains>
+      <Building rdf:ID="Building_4">
+        <has>
+          <owl:NamedIndividual rdf:ID="Buildingmanager_4">
+            <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >BRAGREIS REALTY CORP</name>
+            <rdf:type rdf:resource="#Buildingmanager"/>
+          </owl:NamedIndividual>
+        </has>
+        <belongsto>
+          <owl:NamedIndividual rdf:ID="Owner_4">
+            <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >BRAGREIS REALTY CORP</name>
+            <rdf:type rdf:resource="#Owner"/>
+          </owl:NamedIndividual>
+        </belongsto>
+        <year_constructed rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1926</year_constructed>
+        <area_of_building_on_lot rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >53376</area_of_building_on_lot>
+        <total_oil_consumption_estimation_high rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+        >480000.0</total_oil_consumption_estimation_high>
+        <no_of_floors rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >6</no_of_floors>
+        <has>
+          <owl:NamedIndividual rdf:ID="Facilityaddress_4">
+            <state_abbr rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >NY</state_abbr>
+            <zip_code rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+            >10452</zip_code>
+            <street_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >1204 SHAKESPEARE AVENUE</street_name>
+            <city_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Bronx</city_name>
+            <rdf:type rdf:resource="#Facilityaddress"/>
+          </owl:NamedIndividual>
+        </has>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <type rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Walk-Up Apartments</type>
+        <has>
+          <owl:NamedIndividual rdf:ID="Boiler_4">
+            <number_of_identical_boilers rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+            >1</number_of_identical_boilers>
+            <Installation_date rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+            >1983-12-03</Installation_date>
+            <retirement_date rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+            >2018-12-03</retirement_date>
+            <rdf:type rdf:resource="#Boiler"/>
+            <application rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >CA352883Z </application>
+            <agerange rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >26 to 30 yrs</agerange>
+            <model rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >ROCKMILLS MP100 </model>
+            <capacity rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+            >4.2</capacity>
+          </owl:NamedIndividual>
+        </has>
+        <no_of_residential_units rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >67</no_of_residential_units>
+        <belongsto rdf:resource="#Borogh_block_and_lot_4"/>
+        <total_oil_consumption_estimation_low rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+        >336000.0</total_oil_consumption_estimation_low>
+      </Building>
+    </contains>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:ID="Borogh_block_and_lot_5">
+    <rdf:type rdf:resource="#Borogh_block_and_lot"/>
+    <contains>
+      <Building rdf:ID="Building_5">
+        <belongsto>
+          <owl:NamedIndividual rdf:ID="Owner_5">
+            <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >PROMENADE APARTMENTS</name>
+            <rdf:type rdf:resource="#Owner"/>
+          </owl:NamedIndividual>
+        </belongsto>
+        <year_constructed rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1972</year_constructed>
+        <area_of_building_on_lot rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >461475</area_of_building_on_lot>
+        <belongsto rdf:resource="#Borogh_block_and_lot_5"/>
+        <no_of_floors rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >32</no_of_floors>
+        <has>
+          <owl:NamedIndividual rdf:ID="Facilityaddress_5">
+            <city_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >NEW YORK</city_name>
+            <zip_code rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+            >10463</zip_code>
+            <rdf:type rdf:resource="#Facilityaddress"/>
+            <street_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >150 225 STREET</street_name>
+            <state_abbr rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >NY</state_abbr>
+          </owl:NamedIndividual>
+        </has>
+        <type rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Elevator Apartments</type>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <has>
+          <owl:NamedIndividual rdf:ID="Boiler_5">
+            <rdf:type rdf:resource="#Boiler"/>
+            <Installation_date rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+            >1984-12-03</Installation_date>
+            <application rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >CA037884K </application>
+            <number_of_identical_boilers rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+            >2</number_of_identical_boilers>
+            <retirement_date rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+            >2019-12-03</retirement_date>
+            <model rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >KEWANEE(2) #7L219 </model>
+            <agerange rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >26 to 30 yrs</agerange>
+            <capacity rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+            >100.0</capacity>
+          </owl:NamedIndividual>
+        </has>
+        <no_of_residential_units rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >318</no_of_residential_units>
+        <total_oil_consumption_estimation_low rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+        >172462.0</total_oil_consumption_estimation_low>
+        <total_oil_consumption_estimation_high rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+        >246375.0</total_oil_consumption_estimation_high>
+        <has>
+          <owl:NamedIndividual rdf:ID="Buildingmanager_5">
+            <rdf:type rdf:resource="#Buildingmanager"/>
+            <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >PROMENADE ASSOCIATES</name>
+          </owl:NamedIndividual>
+        </has>
+      </Building>
+    </contains>
+    <borogh_block_lot_number rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >1022150042</borogh_block_lot_number>
+    <no_of_buildings_on_lot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</no_of_buildings_on_lot>
+  </owl:NamedIndividual>
+  <Building rdf:ID="Building_1">
+    <has>
+      <owl:NamedIndividual rdf:ID="Facilityaddress_1">
+        <rdf:type rdf:resource="#Facilityaddress"/>
+        <city_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Bronx</city_name>
+        <street_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >2840 BAILEY AVENUE</street_name>
+        <state_abbr rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >NY</state_abbr>
+        <zip_code rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >10463</zip_code>
+      </owl:NamedIndividual>
+    </has>
+    <year_constructed rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1926</year_constructed>
+    <has>
+      <owl:NamedIndividual rdf:ID="Buildingmanager_1">
+        <rdf:type rdf:resource="#Buildingmanager"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >manager1</name>
+      </owl:NamedIndividual>
+    </has>
+    <area_of_building_on_lot rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >86412</area_of_building_on_lot>
+    <type rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Elevator Apartments</type>
+    <belongsto>
+      <owl:NamedIndividual rdf:ID="Owner_1">
+        <rdf:type rdf:resource="#Owner"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >owner1</name>
+      </owl:NamedIndividual>
+    </belongsto>
+    <total_oil_consumption_estimation_high rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >716160.0</total_oil_consumption_estimation_high>
+    <total_oil_consumption_estimation_low rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >501312.0</total_oil_consumption_estimation_low>
+    <has>
+      <owl:NamedIndividual rdf:ID="Boiler_1">
+        <rdf:type rdf:resource="#Boiler"/>
+        <application xml:lang="en">CA348086Y </application>
+        <number_of_identical_boilers rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</number_of_identical_boilers>
+        <capacity rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+        >6.0</capacity>
+        <retirement_date rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+        >2021-12-03</retirement_date>
+        <agerange rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >21 to 26 years</agerange>
+        <model xml:lang="en">ROCKMILLS MP 150 </model>
+        <Installation_date rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+        >1986-12-03</Installation_date>
+      </owl:NamedIndividual>
+    </has>
+    <belongsto>
+      <owl:NamedIndividual rdf:ID="Borogh_block_and_lot_20">
+        <no_of_buildings_on_lot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1</no_of_buildings_on_lot>
+        <rdf:type rdf:resource="#Borogh_block_and_lot"/>
+        <contains rdf:resource="#Building_1"/>
+        <borogh_block_lot_number rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >2032590022</borogh_block_lot_number>
+        <area_of_building_on_lot rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >86412</area_of_building_on_lot>
+      </owl:NamedIndividual>
+    </belongsto>
+    <no_of_floors rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >0</no_of_floors>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <no_of_residential_units rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >87</no_of_residential_units>
+  </Building>
+  <Building rdf:ID="Building_6">
+    <area_of_building_on_lot rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >55700</area_of_building_on_lot>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <has>
+      <owl:NamedIndividual rdf:ID="Boiler_6">
+        <application rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >CA024288L </application>
+        <model rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >FEDERAL FST 125 </model>
+        <agerange rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >21 to 26 yrs</agerange>
+        <Installation_date rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+        >1988-12-03</Installation_date>
+        <number_of_identical_boilers rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</number_of_identical_boilers>
+        <capacity rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+        >4.96</capacity>
+        <retirement_date rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+        >2023-12-03</retirement_date>
+        <rdf:type rdf:resource="#Boiler"/>
+      </owl:NamedIndividual>
+    </has>
+    <belongsto>
+      <owl:NamedIndividual rdf:ID="Owner_6">
+        <rdf:type rdf:resource="#Owner"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >GIO-GJO REALTY LLC</name>
+      </owl:NamedIndividual>
+    </belongsto>
+    <type rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Elevator Apartments</type>
+    <no_of_residential_units rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >60</no_of_residential_units>
+    <total_oil_consumption_estimation_high rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >384117.0</total_oil_consumption_estimation_high>
+    <belongsto>
+      <owl:NamedIndividual rdf:ID="Borogh_block_and_lot_6">
+        <contains rdf:resource="#Building_6"/>
+        <no_of_buildings_on_lot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1</no_of_buildings_on_lot>
+        <rdf:type rdf:resource="#Borogh_block_and_lot"/>
+        <borogh_block_lot_number rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >2028790080</borogh_block_lot_number>
+      </owl:NamedIndividual>
+    </belongsto>
+    <no_of_floors rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >5</no_of_floors>
+    <year_constructed rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1926</year_constructed>
+    <has>
+      <owl:NamedIndividual rdf:ID="Buildingmanager_6">
+        <rdf:type rdf:resource="#Buildingmanager"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >STEPHEN ZEDAKER</name>
+      </owl:NamedIndividual>
+    </has>
+    <total_oil_consumption_estimation_low rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >268882.0</total_oil_consumption_estimation_low>
+    <has>
+      <owl:NamedIndividual rdf:ID="Facilityaddress_6">
+        <state_abbr rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >NY</state_abbr>
+        <city_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Bronx</city_name>
+        <street_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >1834 PHELAN PLACE</street_name>
+        <rdf:type rdf:resource="#Facilityaddress"/>
+        <zip_code rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >10453</zip_code>
+      </owl:NamedIndividual>
+    </has>
+  </Building>
+  <Building rdf:ID="Building_8">
+    <no_of_residential_units rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >437</no_of_residential_units>
+    <year_constructed rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1961</year_constructed>
+    <no_of_floors rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >20</no_of_floors>
+    <has>
+      <owl:NamedIndividual rdf:ID="Facilityaddress_8">
+        <rdf:type rdf:resource="#Facilityaddress"/>
+        <zip_code rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >10471</zip_code>
+        <city_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Brookyln</city_name>
+        <street_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >5700 ARLINGTON AVENUE</street_name>
+        <state_abbr rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >NY</state_abbr>
+      </owl:NamedIndividual>
+    </has>
+    <total_oil_consumption_estimation_low rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >245000.0</total_oil_consumption_estimation_low>
+    <belongsto>
+      <owl:NamedIndividual rdf:ID="Borogh_block_and_lot_8">
+        <no_of_buildings_on_lot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >2</no_of_buildings_on_lot>
+        <borogh_block_lot_number rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >2059530038</borogh_block_lot_number>
+        <contains rdf:resource="#Building_8"/>
+        <rdf:type rdf:resource="#Borogh_block_and_lot"/>
+      </owl:NamedIndividual>
+    </belongsto>
+    <belongsto>
+      <owl:NamedIndividual rdf:ID="Owner_8">
+        <rdf:type rdf:resource="#Owner"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >GOLDSTICK,PATRICIA</name>
+      </owl:NamedIndividual>
+    </belongsto>
+    <has>
+      <owl:NamedIndividual rdf:ID="Boiler_8">
+        <number_of_identical_boilers rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >2</number_of_identical_boilers>
+        <rdf:type rdf:resource="#Boiler"/>
+        <retirement_date rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+        >2021-12-03</retirement_date>
+        <application rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >CA511786M </application>
+        <capacity rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+        >16.8</capacity>
+        <Installation_date rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+        >1986-12-03</Installation_date>
+        <agerange rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >21 to 26 yrs</agerange>
+        <model rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >ROCKMILLS MP-400 </model>
+      </owl:NamedIndividual>
+    </has>
+    <total_oil_consumption_estimation_high rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >350000.0</total_oil_consumption_estimation_high>
+    <has>
+      <owl:NamedIndividual rdf:ID="Buildingmanager_8">
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >SKYVIEW OWNERS CORPC/O BLUE WOODS MGT. GROUP</name>
+        <rdf:type rdf:resource="#Buildingmanager"/>
+      </owl:NamedIndividual>
+    </has>
+    <type rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Walk-Up Apartments</type>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <area_of_building_on_lot rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >404890</area_of_building_on_lot>
+  </Building>
+  <owl:NamedIndividual rdf:ID="Building_9">
+    <has>
+      <owl:NamedIndividual rdf:ID="Facilityaddress_9">
+        <city_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Bronx</city_name>
+        <zip_code rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >10454</zip_code>
+        <state_abbr rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >NY</state_abbr>
+        <street_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >711 140 STREET</street_name>
+        <rdf:type rdf:resource="#Facilityaddress"/>
+      </owl:NamedIndividual>
+    </has>
+    <year_constructed rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1931</year_constructed>
+    <no_of_residential_units rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >0</no_of_residential_units>
+    <has>
+      <owl:NamedIndividual rdf:ID="Boiler_9">
+        <Installation_date rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+        >1971-12-03</Installation_date>
+        <rdf:type rdf:resource="#Boiler"/>
+        <application rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >CA292971R </application>
+        <capacity rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+        >4.48</capacity>
+        <agerange rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >36 to 40 yrs</agerange>
+        <number_of_identical_boilers rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</number_of_identical_boilers>
+        <model rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >TITUSVILLE SOH 103 </model>
+        <retirement_date rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+        >2010-12-03</retirement_date>
+      </owl:NamedIndividual>
+    </has>
+    <belongsto>
+      <owl:NamedIndividual rdf:ID="Owner_9">
+        <rdf:type rdf:resource="#Owner"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >JACKSON AVENUE DEVELO</name>
+      </owl:NamedIndividual>
+    </belongsto>
+    <total_oil_consumption_estimation_high rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >343075.0</total_oil_consumption_estimation_high>
+    <has>
+      <owl:NamedIndividual rdf:ID="Buildingmanager_9">
+        <rdf:type rdf:resource="#Buildingmanager"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >ROBERT SARDINA</name>
+      </owl:NamedIndividual>
+    </has>
+    <total_oil_consumption_estimation_low rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >240152.0</total_oil_consumption_estimation_low>
+    <belongsto>
+      <owl:NamedIndividual rdf:ID="Borogh_block_and_lot_9">
+        <contains rdf:resource="#Building_9"/>
+        <no_of_buildings_on_lot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >2</no_of_buildings_on_lot>
+        <borogh_block_lot_number rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >2025680068</borogh_block_lot_number>
+        <rdf:type rdf:resource="#Borogh_block_and_lot"/>
+      </owl:NamedIndividual>
+    </belongsto>
+    <no_of_floors rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >5</no_of_floors>
+    <rdf:type rdf:resource="#Building"/>
+    <area_of_building_on_lot rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >34800</area_of_building_on_lot>
+    <type rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Loft Buildings</type>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:ID="Building_2">
+    <has>
+      <owl:NamedIndividual rdf:ID="Facilityaddress_2">
+        <street_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >3900 GREYSTONE AVENUE</street_name>
+        <zip_code rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >10463</zip_code>
+        <city_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Bronx</city_name>
+        <state_abbr rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >NY</state_abbr>
+        <rdf:type rdf:resource="#Facilityaddress"/>
+      </owl:NamedIndividual>
+    </has>
+    <belongsto>
+      <owl:NamedIndividual rdf:ID="Borogh_block_and_lot_21">
+        <no_of_buildings_on_lot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >2</no_of_buildings_on_lot>
+        <rdf:type rdf:resource="#Borogh_block_and_lot"/>
+        <borogh_block_lot_number rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >2057800940</borogh_block_lot_number>
+        <contains rdf:resource="#Building_2"/>
+      </owl:NamedIndividual>
+    </belongsto>
+    <year_constructed rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1928</year_constructed>
+    <total_oil_consumption_estimation_low rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >385000.0</total_oil_consumption_estimation_low>
+    <has>
+      <owl:NamedIndividual rdf:ID="Boiler_2">
+        <model rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >FEDERAL FST-150 </model>
+        <Installation_date rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+        >1993-12-03</Installation_date>
+        <application xml:lang="en">CA014493L </application>
+        <agerange rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >16 to 20 years</agerange>
+        <capacity rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+        >6.27</capacity>
+        <retirement_date rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+        >2013-12-03</retirement_date>
+        <rdf:type rdf:resource="#Boiler"/>
+        <number_of_identical_boilers rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >2</number_of_identical_boilers>
+      </owl:NamedIndividual>
+    </has>
+    <no_of_floors rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >6</no_of_floors>
+    <has>
+      <owl:NamedIndividual rdf:ID="Buildingmanager_2">
+        <rdf:type rdf:resource="#Buildingmanager"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >TROY PITTS SPRINT</name>
+      </owl:NamedIndividual>
+    </has>
+    <belongsto>
+      <owl:NamedIndividual rdf:ID="Owner_2">
+        <rdf:type rdf:resource="#Owner"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >WIENER, EDITH</name>
+      </owl:NamedIndividual>
+    </belongsto>
+    <rdf:type rdf:resource="#Building"/>
+    <no_of_residential_units rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >127</no_of_residential_units>
+    <area_of_building_on_lot rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >134703</area_of_building_on_lot>
+    <type rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Elevator Apartments</type>
+    <total_oil_consumption_estimation_high rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+    >550000.0</total_oil_consumption_estimation_high>
+  </owl:NamedIndividual>
+</rdf:RDF>
+
+<!-- Created with Protege (with OWL Plugin 3.5, Build 663)  http://protege.stanford.edu -->

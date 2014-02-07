@@ -1,0 +1,64 @@
+Getting Data from the instance file
+
+Print max oil consumption for each city 
+ 
+ City    	Consumption
+Bronx     	 716160.0
+Brookyln     350000.0
+NEW YORK     354364.0
+
+ Print the no of residental units its boiler age range and its retirement date
+
+residential_units  Boiler_age_range  Boiler_retirement_date
+87                21 to 26 years           2021-12-03
+60                21 to 26 yrs             2023-12-03
+318               26 to 30 yrs             2019-12-03
+0                 21 to 26 yrs             2024-12-03
+67                26 to 30 yrs             2018-12-03
+127               16 to 20 years           2013-12-03
+0                 36 to 40 yrs             2010-12-03
+266               26 to 30 yrs             2017-12-03
+437               21 to 26 yrs             2021-12-03
+
+Print building Boiler and its high low oil consumption for each building
+ 
+Boiler_model   		Oil_consumption_high   Oil_consumption_low
+
+ROCKMILLS MP 150             716160.0      501312.0
+FEDERAL FST-150              550000.0      385000.0
+CLEAVER BROOKS CB-600-600    492750.0      344925.0
+ROCKMILLS MP100              480000.0      336000.0
+FEDERAL FST 125              384117.0      268882.0
+KEWANEE 7L-289               354364.0      248055.0
+ROCKMILLS MP-400             350000.0      245000.0
+TITUSVILLE SOH 103           343075.0      240152.0
+KEWANEE(2) #7L219          	 246375.0      172462.0
+
+ Print Building name its city and its energy benchmark
+
+Building_name 	City 		Energy_benchmark
+
+HRA          Bronx         	  88.3 
+DCLA         NEW YORK         371.8 
+CUNY         Brooklyn         361
+ACS          Bronx            334.5
+DCAS         NEW YORK         306.5
+ACS          Queens           211.1
+BPL          Brooklyn         162.6 
+NYPD         Queens           142.4 
+ACS          Brooklyn         141.4
+
+Print building manager and owner for each building
+ 
+
+ Owner                             Buildingmanager
+
+owner1              				 manager1
+GIO-GJO REALTY LLC               	STEPHEN ZEDAKER
+PROMENADE APARTMENTS               	PROMENADE ASSOCIATES
+BRONX LEBANON HOSPITAL              BRONX LEBANON HOSPITAL
+BRAGREIS REALTY CORP               	BRAGREIS REALTY CORP
+WIENER, EDITH               		TROY PITTS SPRINT
+JACKSON AVENUE DEVELO               ROBERT SARDINA
+TILDEN TOWERS  II               	801 TILDEN STREET CORP
+GOLDSTICK,PATRICIA               	SKYVIEW OWNERS CORPC/O BLUE WOODS MGT. GROUP

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="C:/Users/AGASTHESWAR/Desktop/apache-jena-2.11.0/lib/commons-codec-1.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AGASTHESWAR/Desktop/apache-jena-2.11.0/lib/httpclient-4.2.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AGASTHESWAR/Desktop/apache-jena-2.11.0/lib/httpcore-4.2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AGASTHESWAR/Desktop/apache-jena-2.11.0/lib/jcl-over-slf4j-1.6.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AGASTHESWAR/Desktop/apache-jena-2.11.0/lib/jena-arq-2.11.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AGASTHESWAR/Desktop/apache-jena-2.11.0/lib/jena-core-2.11.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AGASTHESWAR/Desktop/apache-jena-2.11.0/lib/jena-iri-1.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AGASTHESWAR/Desktop/apache-jena-2.11.0/lib/jena-sdb-1.4.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AGASTHESWAR/Desktop/apache-jena-2.11.0/lib/jena-tdb-1.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AGASTHESWAR/Desktop/apache-jena-2.11.0/lib/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AGASTHESWAR/Desktop/apache-jena-2.11.0/lib/slf4j-api-1.6.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AGASTHESWAR/Desktop/apache-jena-2.11.0/lib/xercesImpl-2.11.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AGASTHESWAR/Desktop/apache-jena-2.11.0/lib/xml-apis-1.4.01.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AGASTHESWAR/Desktop/pellet-2.3.1/lib/aterm-java-1.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AGASTHESWAR/Desktop/pellet-2.3.1/lib/pellet-cli.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AGASTHESWAR/Desktop/pellet-2.3.1/lib/pellet-core.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AGASTHESWAR/Desktop/pellet-2.3.1/lib/pellet-datatypes.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AGASTHESWAR/Desktop/pellet-2.3.1/lib/pellet-el.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AGASTHESWAR/Desktop/pellet-2.3.1/lib/pellet-explanation.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AGASTHESWAR/Desktop/pellet-2.3.1/lib/pellet-jena.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AGASTHESWAR/Desktop/pellet-2.3.1/lib/pellet-modularity.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AGASTHESWAR/Desktop/pellet-2.3.1/lib/pellet-owlapiv3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AGASTHESWAR/Desktop/pellet-2.3.1/lib/pellet-pellint.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AGASTHESWAR/Desktop/pellet-2.3.1/lib/pellet-query.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AGASTHESWAR/Desktop/pellet-2.3.1/lib/pellet-rules.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AGASTHESWAR/Desktop/pellet-2.3.1/lib/pellet-test.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AGASTHESWAR/Desktop/pellet-2.3.1/lib/jgrapht/jgrapht-jdk1.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AGASTHESWAR/Desktop/pellet-2.3.1/lib/owlapiv3/owlapi-distribution-3.4.3-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AGASTHESWAR/Desktop/pellet-2.3.1/lib/antlr/antlr-runtime-3.2.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
